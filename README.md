@@ -3,5 +3,7 @@ app que exibe informações sobre filmes/séries. feito com react js para pratic
 
 <img src="https://raw.githubusercontent.com/herbertizidro/movie-info-app/develop/screencapture-localhost-3000-2021-11-18-22_26_15.png">
 
+acesse aqui: https://boring-bose-f4b5ec.netlify.app
+
 
 
