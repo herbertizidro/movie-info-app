@@ -36,6 +36,11 @@ const SearchMovieOrSerie = () => {
 	})
 	
 	useEffect(() => {
+		
+		function scrollToDiv () { 
+			let scroll_div = document.getElementById("movie-or-serie-component");
+			scroll_div.scrollIntoView({behavior: "smooth", block: 'nearest', inline: 'start'})
+		}
 	  
 		/* pega o id do trailer */
 		function getTrailer (title, year) {
@@ -46,6 +51,7 @@ const SearchMovieOrSerie = () => {
 		}
 		
 		getTrailer(dadosImdb.title, dadosImdb.year);
+		scrollToDiv();
 	  
 	}, [dadosImdb.title]);
 	
@@ -155,7 +161,7 @@ const SearchMovieOrSerie = () => {
 
 					</div>				
 					
-					<div className="container">
+					<div id="movie-or-serie-component" className="container">
 						<AppProvider.Provider value={dadosImdb}>
 							{dadosImdb.response === "True" && dadosImdb.type === "movie" && <MovieDetails />}
 							{dadosImdb.response === "True" && dadosImdb.type === "series" && <SerieDetails />}
