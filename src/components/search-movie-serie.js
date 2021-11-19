@@ -35,14 +35,19 @@ const SearchMovieOrSerie = () => {
 		trailer: ""
 	})
 	
-	/* pega o id do trailer */
-	function getTrailer (title, year) {
-		let trailerUrl = ''
-		const movieTrailer = require('movie-trailer')
-		movieTrailer(title, year).then((res) => { trailerUrl = res.split('=')[1] })
-		console.log(trailerUrl)
-		return trailerUrl
-	}
+	useEffect(() => {
+	  
+		/* pega o id do trailer */
+		function getTrailer (title, year) {
+			const movieTrailer = require('movie-trailer')
+			if(title.length){
+				movieTrailer(title, year).then((res) => { setDadosImdb({...dadosImdb, trailer: res.split('=')[1]}) })
+			}
+		}
+		
+		getTrailer(dadosImdb.title, dadosImdb.year);
+	  
+	}, [dadosImdb.title]);
 	
 	/* pega as informações da obra e atualiza o estado */
 	function getOmdb () {
@@ -55,7 +60,7 @@ const SearchMovieOrSerie = () => {
 				setDadosImdb({...dadosImdb, response: "False"})
 			}else{
 				if(json["Type"] === "movie"){
-						
+	
 					setDadosImdb({
 						...dadosImdb,
 						title: json["Title"] || " N/A",
@@ -80,11 +85,11 @@ const SearchMovieOrSerie = () => {
 						website: json["Website"] || " N/A",
 						poster: json["Poster"] || " N/A",
 						response: "True",
-						trailer: getTrailer(json["Title"], json["Year"])
+						trailer: ""
 					})
 						
 				}else if(json["Type"] === "series"){
-						
+
 					setDadosImdb({
 						...dadosImdb,
 						title: json["Title"] || " N/A",
@@ -106,7 +111,7 @@ const SearchMovieOrSerie = () => {
 						totalSeasons: json["totalSeasons"] || " N/A",
 						poster: json["Poster"] || " N/A",
 						response: "True",
-						trailer: getTrailer(json["Title"], json["Year"])
+						trailer: ""
 					})
 										
 				}
