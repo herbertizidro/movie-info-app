@@ -47,6 +47,29 @@ html, body {
 #search-mobile{display: none;}
 #search-desktop{display: block;}
 
+/* texto sobre a imagem do carousel */ 
+#img-carousel{position: relative;} /* posição do container */
+#title-carousel{position: absolute; top: 0; left: 0; margin-top: 120px;} /* posição da box */
+#title-carousel div{color: #fff; padding-left: 10px; padding-right: 10px; margin-left: 15px;} /* texto dentro da box */
+
+/* efeito Morphing - por enquanto só em desktop */ 
+.morphing-text{
+	max-width: 100%;
+	letter-spacing: 5px;
+	font-size: 30px;
+	animation: morphing-text 15s infinite ease-in-out;
+}
+	
+.morphing-text:nth-child(1){ animation-delay: -15s; }
+.morphing-text:nth-child(2){ animation-delay: -11s; }
+.morphing-text:nth-child(3){ animation-delay: -7s; }
+	
+@keyframes morphing-text {
+	0%, 5%, 100% {filter: blur(0px); opacity: 1;}
+	20%, 80% {filter: blur(35px); opacity: 0;}
+}
+
+
 /* CELULARES */
 @media screen and (min-width:
 200px) and (max-width: 552px){
@@ -64,6 +87,7 @@ html, body {
   .alien-img-desktop{display: none;}
   #search-mobile{display: block;}
   #search-desktop{display: none;}
+  #title-carousel{display: none;}
 }
 
 /* TABLETS */
@@ -71,6 +95,7 @@ html, body {
 552px) and (max-width: 1199px){
   .poster, .imdb{display: none;}
   .title{text-align: left; margin-bottom: 10px;}
+  #title-carousel div{display: none;}
 }
 
 @media screen and (min-width:

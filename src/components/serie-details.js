@@ -18,6 +18,7 @@ const SerieDetails = () => {
 				{value => (
 				<div className="row">
 						<div className="container-fluid">
+							<br/>
 							<div className="row">
 								<div className="col-lg-10 title">					
 									<h3>{value.title} ({value.year})</h3>
@@ -35,7 +36,7 @@ const SerieDetails = () => {
 						</figure>
 							
 						<div className="col-lg trailer">
-							<YouTube videoId={''} className={'rounded'} opts={optsTrailer} />
+							<YouTube videoId={''} opts={optsTrailer} />
 						</div>
 						
 						<div className="container-fluid">
@@ -61,7 +62,7 @@ const SerieDetails = () => {
 									<b> Poster:</b> <a className='text-info' href={value.poster}>Show in full size</a>
 								</div>
 							</div>
-							<br/>
+							<br/><br/>
 							<hr class="hr-estilizado"/>
 						</div>
 				</div>				

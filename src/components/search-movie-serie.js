@@ -139,13 +139,22 @@ const SearchMovieOrSerie = () => {
 							<div className="carousel slide" data-ride="carousel">								
 								<div className="carousel-inner">
 									<div className="carousel-item active">
-									  <img className="alien-img-desktop w-100" src={require('./images/alien-desktop.png')}/>
-									  <img className="alien-img-mobile w-100" src={require('./images/alien-mobile.png')}/>
+														
+									  <div id="img-carousel">
+										<img className="alien-img-desktop w-100" src={require('./images/alien-desktop.png')}/>
+										<img className="alien-img-mobile w-100" src={require('./images/alien-mobile.png')}/>
+										<div id="title-carousel">
+											<div class="morphing-text">Lorem Ipsum.</div>
+											<div class="morphing-text">Blá blá blá blá.</div>
+											<div class="morphing-text">Welcome! =D</div>
+										</div>
+									  </div>
+									  
 									  <div id="search-desktop" className="carousel-caption">
 										<div className="input-group">
-											<input type="text" className="form-control form-control-lg shadow-none" placeholder="Search for a movie or serie title" value={dadosImdb.input} onChange={(e) => updateInput(e)}/>
+											<input type="text" className="form-control form-control-lg shadow-none rounded-0" placeholder="Search for a movie or serie title" value={dadosImdb.input} onChange={(e) => updateInput(e)}/>
 											<div className="input-group-append">
-												<button className="btn btn-info shadow-none" type="button" onClick={() => getOmdb()}>Search</button>
+												<button className="btn btn-info shadow-none rounded-0" type="button" onClick={() => getOmdb()}>Search</button>
 											</div>
 										</div>
 										{dadosImdb.response === "False" && <div className="alert alert-danger mt-2" role="alert">Sorry, no result found&nbsp;&#128546;</div>}
@@ -169,7 +178,7 @@ const SearchMovieOrSerie = () => {
 					</div>
 					
 					<div className="container">
-						<br/><div className="text-center"><h3>About</h3></div><br/>
+						<br/><div className="text-center"><h3>About Us</h3></div><br/>
 						<p>
 								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, of a when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
 								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
