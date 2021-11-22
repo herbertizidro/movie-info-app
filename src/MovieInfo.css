@@ -76,7 +76,7 @@ html, body {
   .poster{
 	display: none;
   }
-  .plot{background: #F5F5F5; padding: 2px;}
+  .plot{background: #F5F5F5; padding-left: 2px; padding-right: 2px; padding-top: 15px; padding-bottom: 15px;}
   .imdb{display: none;}
   .title{text-align: center; margin-top: 10px; margin-bottom: 10px;}
   .trailer{

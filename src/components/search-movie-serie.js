@@ -145,16 +145,16 @@ const SearchMovieOrSerie = () => {
 										<img className="alien-img-mobile w-100" src={require('./images/alien-mobile.png')}/>
 										<div id="title-carousel">
 											<div class="morphing-text">Lorem Ipsum.</div>
-											<div class="morphing-text">Blá blá blá blá.</div>
-											<div class="morphing-text">Welcome! =D</div>
+											<div class="morphing-text">Lorem Ipsum is simply.</div>
+											<div class="morphing-text">Welcome!</div>
 										</div>
 									  </div>
 									  
 									  <div id="search-desktop" className="carousel-caption">
 										<div className="input-group">
-											<input type="text" className="form-control form-control-lg shadow-none rounded-0" placeholder="Search for a movie or serie title" value={dadosImdb.input} onChange={(e) => updateInput(e)}/>
+											<input type="text" className="form-control form-control-lg shadow-none" placeholder="Search for a movie or serie title" value={dadosImdb.input} onChange={(e) => updateInput(e)}/>
 											<div className="input-group-append">
-												<button className="btn btn-info shadow-none rounded-0" type="button" onClick={() => getOmdb()}>Search</button>
+												<button className="btn btn-info shadow-none" type="button" onClick={() => getOmdb()}>Search</button>
 											</div>
 										</div>
 										{dadosImdb.response === "False" && <div className="alert alert-danger mt-2" role="alert">Sorry, no result found&nbsp;&#128546;</div>}
