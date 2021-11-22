@@ -29,7 +29,7 @@ function MovieInfo(){
 			</section>
 
 			<footer className="bg-dark text-white">
-				<small>Developed by <a href="https://github.com/herbertizidro/movie_info_react_app" style={{fontSize: "12px"}}>Herbert Souza</a></small>
+				<small>Developed by <a href="https://github.com/herbertizidro/movie-info-app" style={{fontSize: "12px"}}>Herbert Souza</a></small>
 			</footer>
 		</div>
 	</BrowserRouter>
