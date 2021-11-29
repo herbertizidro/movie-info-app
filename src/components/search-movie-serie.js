@@ -36,8 +36,8 @@ const SearchMovieOrSerie = () => {
 		searchHistory: ""
 	})
 	
+	/* atualiza o estado de acordo com o conteúdo do local storage */
 	useEffect(() => {
-		/* atualiza o estado de acordo com o conteúdo do local storage  */
 		let searchHistory = localStorage.getItem("searchHistory");
 		if (searchHistory !== null) {
 			setDadosImdb({...dadosImdb, searchHistory })			
@@ -74,10 +74,17 @@ const SearchMovieOrSerie = () => {
 			if(json["Response"] === "False"){
 				setDadosImdb({...dadosImdb, response: "False"})
 			}else{
-				localStorage.setItem('searchHistory', json["Title"].toUpperCase());
-				
 				if(json["Type"] === "movie"){
-	
+					
+					// seta o titulo do filme pro localStorage pra que fique registrada a última obra pesquisada
+					// decidi pôr o titulo e não o "dadosImdb.input" porque o titulo é mais completo em alguns
+					// casos, como o filme popularmente conhecido como "Zohan"
+					localStorage.setItem('searchHistory', json["Title"].toUpperCase());
+					
+					// em alguns casos a nota do rotten não está disponível
+					let rotten;
+					try{ rotten = json["Ratings"][1]["Value"]; }catch(e){ rotten = "N/A"; }
+				
 					setDadosImdb({
 						...dadosImdb,
 						title: json["Title"] || " N/A",
@@ -95,7 +102,7 @@ const SearchMovieOrSerie = () => {
 						awards: json["Awards"] || " N/A",			
 						imdb: json["imdbRating"] || " N/A",
 						imdbid: json["imdbID"] || " N/A",
-						rotten: json["Ratings"][1]["Value"] || " N/A",						
+						rotten: rotten,
 						type: json["Type"] || " N/A",
 						boxoffice: json["BoxOffice"] || " N/A",
 						production: json["Production"] || " N/A",
@@ -106,6 +113,8 @@ const SearchMovieOrSerie = () => {
 					})
 						
 				}else if(json["Type"] === "series"){
+					
+					localStorage.setItem('searchHistory', json["Title"].toUpperCase());
 
 					setDadosImdb({
 						...dadosImdb,
