@@ -32,8 +32,17 @@ const SearchMovieOrSerie = () => {
 		website: "",
 		poster: "",
 		response: "",
-		trailer: ""
+		trailer: "",
+		searchHistory: ""
 	})
+	
+	useEffect(() => {
+		/* atualiza o estado de acordo com o conteúdo do local storage  */
+		let searchHistory = localStorage.getItem("searchHistory");
+		if (searchHistory !== null) {
+			setDadosImdb({...dadosImdb, searchHistory })			
+		}
+	}, [])
 	
 	useEffect(() => {
 		
@@ -56,16 +65,18 @@ const SearchMovieOrSerie = () => {
 	}, [dadosImdb.title]);
 	
 	/* pega as informações da obra e atualiza o estado */
-	function getOmdb () {
+	async function getOmdb () {
+		
 			let url = `https://www.omdbapi.com/?apikey=a7d879d7&t=${dadosImdb.input}&plot=full`
-			fetch(url).then(res => {
-			return res.json()
-		})
-		.then(json => {
+			const response = await fetch(url);
+			const json = await response.json();
+
 			if(json["Response"] === "False"){
 				setDadosImdb({...dadosImdb, response: "False"})
 			}else{
 				if(json["Type"] === "movie"){
+					
+					localStorage.setItem('searchHistory', json["Title"].toUpperCase());
 	
 					setDadosImdb({
 						...dadosImdb,
@@ -95,6 +106,8 @@ const SearchMovieOrSerie = () => {
 					})
 						
 				}else if(json["Type"] === "series"){
+					
+					localStorage.setItem('searchHistory', json["Title"].toUpperCase());
 
 					setDadosImdb({
 						...dadosImdb,
@@ -122,7 +135,6 @@ const SearchMovieOrSerie = () => {
 										
 				}
 			}
-		})
 		
 	}
 	
@@ -158,12 +170,16 @@ const SearchMovieOrSerie = () => {
 											</div>
 										</div>
 										{dadosImdb.response === "False" && <div className="alert alert-danger mt-2" role="alert">Sorry, no result found&nbsp;&#128546;</div>}
+										{dadosImdb.searchHistory.length && <div id="last-search" className="mt-2"><span className="text-white">Your last search:  </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
 									   </div>
+									   
 									   <div id="search-mobile" className="carousel-caption">
 										<input type="text" className="form-control shadow-none" placeholder="Search for a movie or serie title" value={dadosImdb.input} onChange={(e) => updateInput(e)}/>
 										<button className="btn btn-info mt-2 w-100 shadow-none" type="button" onClick={() => getOmdb()}>Search</button>										
 										{dadosImdb.response === "False" && <div className="alert alert-danger mt-2" role="alert">Sorry, no result found&nbsp;&#128546;</div>}
+										{dadosImdb.searchHistory.length && <div id="last-search" className="mt-2"><span className="text-white">Your last search: </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
 									   </div>
+									   
 									</div>
 							    </div>
 							</div>
@@ -180,8 +196,8 @@ const SearchMovieOrSerie = () => {
 					<div className="container">
 						<br/><div className="text-center"><h3>About Us</h3></div><br/>
 						<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, of a when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, of a when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
 						</p><br/>
 					</div>
 		
