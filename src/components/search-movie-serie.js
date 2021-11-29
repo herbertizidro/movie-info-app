@@ -74,9 +74,9 @@ const SearchMovieOrSerie = () => {
 			if(json["Response"] === "False"){
 				setDadosImdb({...dadosImdb, response: "False"})
 			}else{
+				localStorage.setItem('searchHistory', json["Title"].toUpperCase());
+				
 				if(json["Type"] === "movie"){
-					
-					localStorage.setItem('searchHistory', json["Title"].toUpperCase());
 	
 					setDadosImdb({
 						...dadosImdb,
@@ -106,8 +106,6 @@ const SearchMovieOrSerie = () => {
 					})
 						
 				}else if(json["Type"] === "series"){
-					
-					localStorage.setItem('searchHistory', json["Title"].toUpperCase());
 
 					setDadosImdb({
 						...dadosImdb,
