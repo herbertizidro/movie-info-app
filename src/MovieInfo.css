@@ -1,58 +1,60 @@
 
+/* estrutura */
 html, body {margin: 0; padding: 0; height: 100vh;}
-
 *{font-family: 'Quicksand', sans-serif; font-size: 15px;}
-
 .wrapper{display: flex; flex-direction: column; min-height: 100vh;}
-
 .top{width: 100%;}
-
 .content{flex-grow: 1; padding-bottom: 20px;}
-
 .container{margin-top: 10px;}
 
+/* carousel e input */
 .imdb{text-align: right; margin-top: 15px;}
 .title{text-align: left; margin-top: 15px;}
 .plot, .details{margin-top: 10px;}
 .omit{display: inline;}
 .hr-estilizado{color: #f00; background-color: #F5F5F5; height: 1px;}
-
 .alien-img-mobile{display: none;}
 .alien-img-desktop{display: inline; min-height: 250px; min-width: 600px;}
 #search-mobile{display: none;}
 #search-desktop{display: block;}
 
 /* texto sobre a imagem do carousel */ 
-#img-carousel{position: relative;} /* posição do container */
+#img-carousel{position: relative; border-bottom-color: #353a40; border-bottom-width: 4px; border-bottom-style: solid;} /* posição do container */
 #title-carousel{position: absolute; top: 0; left: 0; margin-top: 120px;} /* posição da box */
 #title-carousel div{color: #fff; padding-left: 10px; padding-right: 10px; margin-left: 15px;} /* texto dentro da box */
 
 /* efeito Morphing - por enquanto só em desktop */ 
-.morphing-text{max-width: 100%; letter-spacing: 5px; font-size: 30px; animation: morphing-text 15s infinite ease-in-out;}
-/* delay de cada elemento que utiliza a classe morphing-text */	
-.morphing-text:nth-child(1){animation-delay: -15s;}
-.morphing-text:nth-child(2){animation-delay: -11s;}
-.morphing-text:nth-child(3){animation-delay: -7s;}
-/* transição do filtro(blur) e da opacidade(opacity) */	
+.morphing-text{max-width: 100%; letter-spacing: 5px; font-size: 30px; animation: morphing-text 15s infinite ease-in-out;}	
+.morphing-text:nth-child(1){ animation-delay: -15s; }
+.morphing-text:nth-child(2){ animation-delay: -11s; }
+.morphing-text:nth-child(3){ animation-delay: -7s; }
+	
 @keyframes morphing-text {
- 	0%, 5%, 100% {filter: blur(0px); opacity: 1;}
- 	20%, 80% {filter: blur(35px); opacity: 0;}
+	0%, 5%, 100% {filter: blur(0px); opacity: 1;}
+	20%, 80% {filter: blur(35px); opacity: 0;}
 }
-
+/* div "última pesquisa" */
+#last-search{display: block;}
 
 /* CELULARES */
 @media screen and (min-width:
 200px) and (max-width: 552px){
-  .poster{display: none;}
+  .poster{
+	display: none;
+  }
   .plot{background: #F5F5F5; padding-left: 2px; padding-right: 2px; padding-top: 15px; padding-bottom: 15px;}
   .imdb{display: none;}
   .title{text-align: center; margin-top: 10px; margin-bottom: 10px;}
-  .trailer{padding: 0 !important; margin: 0 !important;}
+  .trailer{
+    padding: 0 !important;
+    margin: 0 !important;
+  }
   .alien-img-mobile{display: inline; min-height: 250px; max-height: 500px; min-width: 520px; min-height: 250px}
   .alien-img-desktop{display: none;}
   #search-mobile{display: block;}
   #search-desktop{display: none;}
   #title-carousel{display: none;}
+  #last-search{display: none;}
 }
 
 /* TABLETS */
@@ -63,22 +65,9 @@ html, body {margin: 0; padding: 0; height: 100vh;}
   #title-carousel div{display: none;}
 }
 
-@media screen and (min-width:
-767px) and (max-width: 990px){
-  .ilustracao-perfil{margin-right: 20px;}
-}
-
+/* links e estilo do footer */
 a{cursor: pointer;}
-
 a:link, a:active, a:visited{color: white;}
-
 a:hover{color: #5bc0de; text-decoration: none;}
-
-footer{
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  padding: 10px;
-}
+footer{bottom: 0; left: 0; width: 100%; text-align: center; padding: 10px;}
 
