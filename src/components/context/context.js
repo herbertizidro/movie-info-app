@@ -1,5 +1,7 @@
 import React from 'react'
 
+/* definição do contexto da aplicação */
+
 const AppContext = React.createContext()
 
 export const AppProvider = AppContext.Provider;
