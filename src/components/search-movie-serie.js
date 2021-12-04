@@ -5,6 +5,12 @@ import AppProvider from './context/context';
 import { Icon, InlineIcon } from '@iconify/react';
 import movie2Line from '@iconify/icons-ri/movie-2-line';
 
+/* este componente é reponsável por receber o nome da obra(filme ou série) e obter informações através da API do OMDb */
+/* e também o trailer(ou um vídeo relacionado. "making of", por exemplo) */
+/* ele controla quem exibe essas informações, pois pode alternar entre filme ou série */
+/* os componentes que podem exibir são: MovieDetails ou SerieDetails */
+/* os dados são passados "pra baixo" por meio da Context Api */
+
 const SearchMovieOrSerie = () => {
 	
 	const [dadosImdb, setDadosImdb] = useState({
