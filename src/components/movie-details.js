@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import AppContext from './context/context';
 import YouTube from 'react-youtube';
 
+/* componente responsável por exibir toda informação relacionada ao filme pesquisado - recebe a informação "de cima" por meio da Context Api */
+/* nesse caso utilizando o useContext(AppContext) */
+
 const MovieDetails = () => {
 	
 		/* aqui utilizei o useContext e em 'SerieDetails' utilizei o AppConsumer.Consumer - apenas para testar as duas formas
