@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import { Icon, InlineIcon } from '@iconify/react';
 import movie2Line from '@iconify/icons-ri/movie-2-line';
 
+/* esse componente(pai) renderiza o wrapper que contém a estrutura do app (front-end) e controla as rotas */
 
 function MovieInfo(){
   return (
