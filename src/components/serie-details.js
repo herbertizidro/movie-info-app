@@ -2,6 +2,9 @@ import React from 'react';
 import AppConsumer from './context/context'; //com Consumer
 import YouTube from 'react-youtube';
 
+/* componente responsável por exibir toda informação relacionada à série pesquisada - recebe a informação "de cima" por meio da Context Api */
+/* nesse caso utilizando o <AppConsumer.Consumer> */
+
 const SerieDetails = () => {
 	
 		const optsTrailer = {
