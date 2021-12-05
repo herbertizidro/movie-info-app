@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import MovieDetails from "./movie-details";
 import SerieDetails from "./serie-details";
 import AppProvider from './context/context';
 import { Icon, InlineIcon } from '@iconify/react';
 import movie2Line from '@iconify/icons-ri/movie-2-line';
 
-/* este componente é reponsável por receber o nome da obra(filme ou série) e obter informações através da API do OMDb */
+/* esse componente é reponsável por receber o nome da obra(filme ou série) e obter informações através da API do OMDb */
 /* e também o trailer(ou um vídeo relacionado. "making of", por exemplo) */
 /* ele controla quem exibe essas informações, pois pode alternar entre filme ou série */
 /* os componentes que podem exibir são: MovieDetails ou SerieDetails */
-/* os dados são passados "pra baixo" por meio da Context Api */
 
 const SearchMovieOrSerie = () => {
 	
 	const [dadosImdb, setDadosImdb] = useState({
-		input: "",
 		title: "",
 		year: "",
 		rated: "",
@@ -42,6 +40,9 @@ const SearchMovieOrSerie = () => {
 		searchHistory: "",
 		error: false
 	})
+	
+	/* melhoria de performance, pra evitar renderizar desnecessariamente a cada atualização do input */
+	const inputRef = useRef("")
 	
 	/* executa uma vez ao iniciar */
 	useEffect(() => {
@@ -148,15 +149,15 @@ const SearchMovieOrSerie = () => {
 		}
 	}
 	
-	/* atualiza a propriedade input do estado com o nome da obra, que é utilizado na requisição da função getOmdb */
+	/* atualiza o inputRef com o nome da obra, que é utilizado na requisição da função getOmdb */
 	function inputUpdate (e) {
-		setDadosImdb({...dadosImdb, input: e.target.value});
+		inputRef.current = e.target.value;
 	}
 	
 	/* pega as informações da obra */
 	async function getOmdb () {
 		
-		let url = `https://www.omdbapi.com/?apikey=a7d879d7&t=${dadosImdb.input}&plot=full`
+		let url = `https://www.omdbapi.com/?apikey=a7d879d7&t=${inputRef.current}&plot=full`
 		
 		try{
 			const response = await fetch(url);
