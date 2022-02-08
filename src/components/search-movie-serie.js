@@ -187,7 +187,7 @@ const SearchMovieOrSerie = () => {
 										<img className="alien-img-mobile w-100" src={require('./images/alien-mobile.png')}/>
 										<div id="title-carousel">
 											<div class="morphing-text">Lorem Ipsum.</div>
-											<div class="morphing-text">Lorem Ipsum is simply.</div>
+											<div class="morphing-text">Lorem Ipsum is <br/> simply.</div>
 											<div class="morphing-text">Welcome!</div>
 										</div>
 									  </div>
