@@ -41,6 +41,8 @@ const SearchMovieOrSerie = () => {
 		error: false
 	})
 	
+	const [loading, setLoading] = useState(false);
+	
 	/* melhoria de performance, pra evitar renderizar desnecessariamente a cada atualização do input */
 	const inputRef = useRef("")
 	
@@ -149,26 +151,36 @@ const SearchMovieOrSerie = () => {
 		}
 	}
 	
-	/* atualiza o inputRef com o nome da obra, que é utilizado na requisição da função getOmdb */
+	/* atualiza o inputRef com o nome da obra, que é utilizado na requisição da função getMovieInfoApi */
 	function inputUpdate (e) {
 		inputRef.current = e.target.value;
 	}
 	
-	/* pega as informações da obra */
-	async function getOmdb () {
-		
-		let url = `https://www.omdbapi.com/?apikey=a7d879d7&t=${inputRef.current}&plot=full`
+	/* pega as informações da obra através da MovieInfoApi next js */
+	async function getMovieInfoApi () {
+		setLoading(true)
+		// o deploy da api ainda não foi realizado
+		let url = `<--->/api/movieinfo?search=${inputRef.current}`
 		
 		try{
 			const response = await fetch(url);
+			const responseStatus = response.status;
 			const json = await response.json();
-			if(json["Response"] === "False"){
-				setDadosImdb({...dadosImdb, response: "False"})
+			
+			if(responseStatus == 200){
+				if(json["Response"] === "False"){
+					setDadosImdb({...dadosImdb, response: "False"})
+				}else{
+					stateUpdate(json);
+				}
 			}else{
-				stateUpdate(json);
+				setDadosImdb({...dadosImdb, error: true})
 			}
+			setLoading(false);
+			
 		}catch(e){
 			setDadosImdb({...dadosImdb, error: true})
+			setLoading(false);
 		}
 		
 	}
@@ -202,14 +214,16 @@ const SearchMovieOrSerie = () => {
 										{dadosImdb.response === "False" && <div className="alert alert-danger mt-2" role="alert">Sorry, no result found&nbsp;&#128546;</div>}
 										{dadosImdb.searchHistory.length > 0 && <div id="last-search" className="mt-2"><span className="text-white">Your last search:  </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
 										{dadosImdb.error === true && <div className="alert alert-danger mt-2" role="alert">Sorry, an internal error occurred &nbsp;&#128546;</div>}
+										{loading && <div className="mt-3 d-flex justify-content-center"><div className="spinner-grow text-info" role="status"><span className="sr-only">Loading...</span></div></div>}
 									   </div>
 									   
 									   <div id="search-mobile" className="carousel-caption">
 										<input type="text" className="form-control shadow-none" placeholder="Search for a movie or serie title" value={dadosImdb.input} onChange={(e) => inputUpdate(e)}/>
-										<button className="btn btn-info mt-2 w-100 shadow-none" type="button" onClick={() => getOmdb()}>Search</button>										
+										<button className="btn btn-info mt-2 w-100 shadow-none" type="button" onClick={() => getMovieInfoApi()}>Search</button>										
 										{dadosImdb.response === "False" && <div className="alert alert-danger mt-2" role="alert">Sorry, no result found&nbsp;&#128546;</div>}
 										{dadosImdb.searchHistory.length > 0 && <div id="last-search" className="mt-2"><span className="text-white">Your last search: </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
 										{dadosImdb.error === true && <div className="alert alert-danger mt-2" role="alert">Sorry, an internal error occurred &nbsp;&#128546;</div>}
+										{loading && <div className="mt-3 d-flex justify-content-center"><div className="spinner-grow text-info" role="status"><span className="sr-only">Loading...</span></div></div>}
 									   </div>
 									   
 									</div>
