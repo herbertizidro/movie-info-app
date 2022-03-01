@@ -5,10 +5,9 @@ import AppProvider from './context/context';
 import { Icon, InlineIcon } from '@iconify/react';
 import movie2Line from '@iconify/icons-ri/movie-2-line';
 
-/* esse componente é reponsável por receber o nome da obra(filme ou série) e obter informações através da API do OMDb */
-/* e também o trailer(ou um vídeo relacionado. "making of", por exemplo) */
+/* esse componente é reponsável por receber os dados da obra através da API Next Js que consulta o OMDb */
 /* ele controla quem exibe essas informações, pois pode alternar entre filme ou série */
-/* os componentes que podem exibir são: MovieDetails ou SerieDetails */
+/* os componentes filhos são: MovieDetails ou SerieDetails */
 
 const SearchMovieOrSerie = () => {
 	
@@ -63,16 +62,7 @@ const SearchMovieOrSerie = () => {
 			let scroll_div = document.getElementById("movie-or-serie-component");
 			scroll_div.scrollIntoView({behavior: "smooth", block: 'nearest', inline: 'start'})
 		}
-	  
-		/* pega o id do trailer */
-		function getTrailer (title, year) {
-			const movieTrailer = require('movie-trailer')
-			if(title.length){
-				movieTrailer(title, year).then((res) => { setDadosImdb({...dadosImdb, trailer: res.split('=')[1]}) })
-			}
-		}
-		
-		getTrailer(dadosImdb.title, dadosImdb.year);
+
 		scrollToDiv();
 	  
 	}, [dadosImdb.title]);
@@ -119,7 +109,7 @@ const SearchMovieOrSerie = () => {
 				website: json["Website"] || " N/A",
 				poster: json["Poster"] || " N/A",
 				response: "True",
-				trailer: ""
+				trailer: json["Trailer"]
 			})
 						
 		}else if(json["Type"] === "series"){
@@ -145,7 +135,7 @@ const SearchMovieOrSerie = () => {
 				totalSeasons: json["totalSeasons"] || " N/A",
 				poster: json["Poster"] || " N/A",
 				response: "True",
-				trailer: ""
+				trailer: json["Trailer"]
 			})
 										
 		}
