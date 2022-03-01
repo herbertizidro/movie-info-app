@@ -207,7 +207,7 @@ const SearchMovieOrSerie = () => {
 										<div className="input-group">
 											<input type="text" className="form-control form-control-lg shadow-none" placeholder="Search for a movie or serie title" value={dadosImdb.input} onChange={(e) => inputUpdate(e)}/>
 											<div className="input-group-append">
-												<button className="btn btn-info shadow-none" type="button" onClick={() => getOmdb()}>Search</button>
+												<button className="btn btn-info shadow-none" type="button" onClick={() => getMovieInfoApi()}>Search</button>
 											</div>
 										</div>
 										{dadosImdb.response === "False" && <div className="alert alert-danger mt-2" role="alert">Sorry, no result found&nbsp;&#128546;</div>}
