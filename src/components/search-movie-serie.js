@@ -109,7 +109,7 @@ const SearchMovieOrSerie = () => {
 				website: json["Website"] || " N/A",
 				poster: json["Poster"] || " N/A",
 				response: "True",
-				trailer: json["Trailer"]
+				trailer: json["Trailer"].length ? json["Trailer"].split('=')[1] : json["Trailer"];
 			})
 						
 		}else if(json["Type"] === "series"){
@@ -135,7 +135,7 @@ const SearchMovieOrSerie = () => {
 				totalSeasons: json["totalSeasons"] || " N/A",
 				poster: json["Poster"] || " N/A",
 				response: "True",
-				trailer: json["Trailer"]
+				trailer: json["Trailer"].length ? json["Trailer"].split('=')[1] : json["Trailer"];
 			})
 										
 		}
