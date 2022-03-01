@@ -109,7 +109,7 @@ const SearchMovieOrSerie = () => {
 				website: json["Website"] || " N/A",
 				poster: json["Poster"] || " N/A",
 				response: "True",
-				trailer: json["Trailer"].length ? json["Trailer"].split('=')[1] : json["Trailer"]
+				trailer: json["Trailer"].length ? json["Trailer"].split('=')[1] : json["Trailer"] // pega somente o id na url do trailer
 			})
 						
 		}else if(json["Type"] === "series"){
