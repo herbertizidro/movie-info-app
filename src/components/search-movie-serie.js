@@ -153,10 +153,9 @@ const SearchMovieOrSerie = () => {
 		
 		try{
 			const response = await fetch(url);
-			const responseStatus = response.status;
 			const json = await response.json();
 			
-			if(responseStatus == 200){
+			if(response.status == 200){
 				if(json["Response"] === "False"){
 					setDadosImdb({...dadosImdb, response: "False"})
 				}else{
