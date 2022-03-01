@@ -159,8 +159,7 @@ const SearchMovieOrSerie = () => {
 	/* pega as informações da obra através da MovieInfoApi next js */
 	async function getMovieInfoApi () {
 		setLoading(true)
-		// o deploy da api ainda não foi realizado
-		let url = `<--->/api/movieinfo?search=${inputRef.current}`
+		let url = `https://movieinfoapi.netlify.app/api/movieinfo?search=${inputRef.current}`
 		
 		try{
 			const response = await fetch(url);
