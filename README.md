@@ -4,5 +4,7 @@ utiliza uma <a href="https://github.com/herbertizidro/movie-info-api">api</a> de
 
 acesse em: https://movieinfo-app.netlify.app/
 
+<img src="https://raw.githubusercontent.com/herbertizidro/movie-info-app/develop/movie-info-min.png">
+
 
 
