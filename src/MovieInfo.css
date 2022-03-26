@@ -36,9 +36,22 @@ html, body {margin: 0; padding: 0; height: 100vh;}
 /* div "última pesquisa" */
 #last-search{display: block;}
 
+/* DESKTOP */
+@media screen and (min-width:
+1365px){
+	.alien-img-desktop img{height:100% !important; width:auto !important;} /* imagem preenchendo o tamanho da tela */
+}
+
+/* TABLETS */
+@media screen and (min-width:
+571px) and (max-width: 749px){
+	.alien-img-desktop{width: 100%;}
+	#title-carousel{display: none;}
+}
+
 /* CELULARES */
 @media screen and (min-width:
-200px) and (max-width: 552px){
+200px) and (max-width: 570px){
   .poster{
 	display: none;
   }
@@ -55,14 +68,6 @@ html, body {margin: 0; padding: 0; height: 100vh;}
   #search-desktop{display: none;}
   #title-carousel{display: none;}
   #last-search{display: none;}
-}
-
-/* TABLETS */
-@media screen and (min-width:
-552px) and (max-width: 1199px){
-  .poster, .imdb{display: none;}
-  .title{text-align: left; margin-bottom: 10px;}
-  #title-carousel div{display: none;}
 }
 
 /* links e estilo do footer */
