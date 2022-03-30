@@ -39,7 +39,7 @@ const SerieDetails = () => {
 						</figure>
 							
 						<div className="col-lg trailer">
-							<YouTube videoId={value.poster} opts={optsTrailer} />
+							<YouTube videoId={value.trailer} opts={optsTrailer} />
 						</div>
 						
 						<div className="container-fluid">
