@@ -39,7 +39,7 @@ const MovieDetails = () => {
 						</div>
 						
 						<figure className="col-lg-3 poster">
-							<img style={{maxHeight: '377px', minHeight: '377px', width: '270px'}} src={context.poster} alt="" />
+							<img style={{maxHeight: '377px', minHeight: '377px', width: '270px'}} src={context.poster} alt="poster" />
 						</figure>
 						
 						<div className="col-lg trailer">
