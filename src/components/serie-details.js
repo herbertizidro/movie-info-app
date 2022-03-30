@@ -35,11 +35,11 @@ const SerieDetails = () => {
 						</div>
 						
 						<figure className="col-lg-3 poster">
-							<img style={{maxHeight: '377px', minHeight: '377px', width: '270px'}} src={value.poster} alt="" />
+							<img style={{maxHeight: '377px', minHeight: '377px', width: '270px'}} src={value.poster} alt="poster" />
 						</figure>
 							
 						<div className="col-lg trailer">
-							<YouTube videoId={''} opts={optsTrailer} />
+							<YouTube videoId={value.poster} opts={optsTrailer} />
 						</div>
 						
 						<div className="container-fluid">
