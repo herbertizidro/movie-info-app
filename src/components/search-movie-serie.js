@@ -75,6 +75,9 @@ const SearchMovieOrSerie = () => {
 		// casos, como o filme popularmente conhecido como "Zohan" e seu nome real
 		localStorage.setItem('searchHistory', json["Title"].toUpperCase());
 		
+		// caso a api não retorne uma imagem
+		let poster = json["Poster"] == 'N/A' ? require("./images/img-not-found.png") : json["Poster"];
+		
 		if(json["Type"] === "movie"){
 			
 			/* alguns não tem nota do rotten */			
@@ -83,8 +86,9 @@ const SearchMovieOrSerie = () => {
 				rotten = json["Ratings"][1]["Value"];
 			}catch(e){
 				rotten = "N/A";
-			}					
-				
+			}
+			
+
 			setDadosImdb({
 				...dadosImdb,
 				title: json["Title"] || " N/A",
@@ -107,9 +111,9 @@ const SearchMovieOrSerie = () => {
 				boxoffice: json["BoxOffice"] || " N/A",
 				production: json["Production"] || " N/A",
 				website: json["Website"] || " N/A",
-				poster: json["Poster"] || " N/A",
+				poster: poster,
 				response: "True",
-				trailer: json["Trailer"].length ? json["Trailer"].split('=')[1] : json["Trailer"] // pega somente o id na url do trailer
+				trailer: json["Trailer"].length ? json["Trailer"].split('=')[1] : "aDm5WZ3QiIE" // id de um vídeo "not found" genérico
 			})
 						
 		}else if(json["Type"] === "series"){
@@ -133,9 +137,9 @@ const SearchMovieOrSerie = () => {
 				imdbid: json["imdbID"] || " N/A",
 				type: json["Type"] || " N/A",
 				totalSeasons: json["totalSeasons"] || " N/A",
-				poster: json["Poster"] || " N/A",
+				poster: poster,
 				response: "True",
-				trailer: json["Trailer"].length ? json["Trailer"].split('=')[1] : json["Trailer"]
+				trailer: "aDm5WZ3QiIE" // id de um vídeo "not found" genérico
 			})
 										
 		}
@@ -153,9 +157,10 @@ const SearchMovieOrSerie = () => {
 		
 		try{
 			const response = await fetch(url);
+			const responseStatus = response.status;
 			const json = await response.json();
 			
-			if(response.status == 200){
+			if(responseStatus == 200){
 				if(json["Response"] === "False"){
 					setDadosImdb({...dadosImdb, response: "False"})
 				}else{
@@ -218,7 +223,8 @@ const SearchMovieOrSerie = () => {
 							    </div>
 							</div>
 
-					</div>				
+					</div>
+						
 					
 					<div id="movie-or-serie-component" className="container">
 						<AppProvider.Provider value={dadosImdb}>
