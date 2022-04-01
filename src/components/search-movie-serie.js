@@ -76,7 +76,7 @@ const SearchMovieOrSerie = () => {
 		localStorage.setItem('searchHistory', json["Title"].toUpperCase());
 		
 		// caso a api não retorne uma imagem
-		let poster = json["Poster"] == 'N/A' ? require("./images/img-not-found.png") : json["Poster"];
+		let poster = json["Poster"] == 'N/A' ? require("./images/image-not-found.png") : json["Poster"];
 		
 		if(json["Type"] === "movie"){
 			
@@ -88,6 +88,8 @@ const SearchMovieOrSerie = () => {
 				rotten = "N/A";
 			}
 			
+			/* tratamento adicional pro trailer */
+			let trailer = json["Trailer"] != null ? json["Trailer"] : ""
 
 			setDadosImdb({
 				...dadosImdb,
@@ -113,7 +115,7 @@ const SearchMovieOrSerie = () => {
 				website: json["Website"] || " N/A",
 				poster: poster,
 				response: "True",
-				trailer: json["Trailer"].length ? json["Trailer"].split('=')[1] : "aDm5WZ3QiIE" // id de um vídeo "not found" genérico
+				trailer: trailer.length ? trailer.split('=')[1] : "aDm5WZ3QiIE" // id de um vídeo "not found" genérico
 			})
 						
 		}else if(json["Type"] === "series"){
@@ -139,7 +141,7 @@ const SearchMovieOrSerie = () => {
 				totalSeasons: json["totalSeasons"] || " N/A",
 				poster: poster,
 				response: "True",
-				trailer: "aDm5WZ3QiIE" // id de um vídeo "not found" genérico
+				trailer: "aDm5WZ3QiIE" // id de um vídeo "not found" genérico, a biblioteca utilizada só pega trailer de filme
 			})
 										
 		}
@@ -172,6 +174,7 @@ const SearchMovieOrSerie = () => {
 			setLoading(false);
 			
 		}catch(e){
+			console.log(e.message)
 			setDadosImdb({...dadosImdb, error: true})
 			setLoading(false);
 		}
