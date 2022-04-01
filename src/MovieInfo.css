@@ -48,6 +48,12 @@ html, body {margin: 0; padding: 0; height: 100vh;}
 	.alien-img-desktop{width: 100%;}
 	#title-carousel{display: none;}
 }
+@media screen and (min-width:
+552px) and (max-width: 1199px){
+  .poster, .imdb{display: none;}
+  .title{text-align: left; margin-bottom: 10px;}
+  #title-carousel div{display: none;}
+}
 
 /* CELULARES */
 @media screen and (min-width:
