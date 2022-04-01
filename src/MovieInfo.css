@@ -21,7 +21,7 @@ html, body {margin: 0; padding: 0; height: 100vh;}
 /* texto sobre a imagem do carousel */ 
 #img-carousel{position: relative; border-bottom-color: #353a40; border-bottom-width: 4px; border-bottom-style: solid;} /* posição do container */
 #title-carousel{position: absolute; top: 0; left: 0; margin-top: 120px;} /* posição da box */
-#title-carousel div{color: #fff; padding-left: 10px; padding-right: 10px; margin-left: 15px;} /* texto dentro da box */
+#title-carousel div{color: #808080; padding-left: 10px; padding-right: 10px; margin-left: 15px;} /* texto dentro da box */
 
 /* efeito Morphing - por enquanto só em desktop */ 
 .morphing-text{max-width: 100%; letter-spacing: 5px; font-size: 30px; animation: morphing-text 15s infinite ease-in-out;}	
