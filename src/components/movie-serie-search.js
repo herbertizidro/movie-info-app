@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Details from "./details";
+import MovieOrSerieInfo from "./movie-serie-info";
 import AppProvider from './context/context';
 import { Icon, InlineIcon } from '@iconify/react';
 import movie2Line from '@iconify/icons-ri/movie-2-line';
@@ -229,7 +229,7 @@ const SearchMovieOrSerie = () => {
 					
 					<div id="movie-or-serie-component" className="container">
 						<AppProvider.Provider value={dadosImdb}>
-							{dadosImdb.response === "True" && <Details />}
+							{dadosImdb.response === "True" && <MovieOrSerieInfo />}
 						</AppProvider.Provider>
 					</div>
 					

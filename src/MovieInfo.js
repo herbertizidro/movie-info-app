@@ -1,6 +1,6 @@
 import React from 'react';
 import './MovieInfo.css';
-import SearchMovieOrSerie from "./components/search-movie-serie";
+import SearchMovieOrSerie from "./components/movie-serie-search";
 import Contact from "./components/contact";
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 
@@ -10,7 +10,7 @@ import movie2Line from '@iconify/icons-ri/movie-2-line';
 
 /* esse componente(pai) renderiza o wrapper que contém a estrutura do app (front-end) e controla as rotas */
 
-function MovieInfo(){
+function MovieInfoBrowser(){
   return (
 	<BrowserRouter>
 		<div className="wrapper">
@@ -37,4 +37,4 @@ function MovieInfo(){
   );
 }
 
-export default MovieInfo;
+export default MovieInfoBrowser;
