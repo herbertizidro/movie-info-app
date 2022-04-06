@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import MovieDetails from "./movie-details";
-import SerieDetails from "./serie-details";
+import Details from "./details";
 import AppProvider from './context/context';
 import { Icon, InlineIcon } from '@iconify/react';
 import movie2Line from '@iconify/icons-ri/movie-2-line';
 
 /* esse componente é reponsável por receber os dados da obra através da API Next Js que consulta o OMDb */
 /* ele controla quem exibe essas informações, pois pode alternar entre filme ou série */
-/* os componentes filhos são: MovieDetails ou SerieDetails */
 
 const SearchMovieOrSerie = () => {
 	
@@ -231,8 +229,7 @@ const SearchMovieOrSerie = () => {
 					
 					<div id="movie-or-serie-component" className="container">
 						<AppProvider.Provider value={dadosImdb}>
-							{dadosImdb.response === "True" && dadosImdb.type === "movie" && <MovieDetails />}
-							{dadosImdb.response === "True" && dadosImdb.type === "series" && <SerieDetails />}
+							{dadosImdb.response === "True" && <Details />}
 						</AppProvider.Provider>
 					</div>
 					
