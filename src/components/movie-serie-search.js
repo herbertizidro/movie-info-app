@@ -4,8 +4,8 @@ import AppProvider from './context/context';
 import { Icon, InlineIcon } from '@iconify/react';
 import movie2Line from '@iconify/icons-ri/movie-2-line';
 
-/* esse componente é reponsável por receber os dados da obra através da API Next Js que consulta o OMDb */
-/* ele controla quem exibe essas informações, pois pode alternar entre filme ou série */
+/* esse componente é reponsável por receber os dados da obra através da API Next Js que consulta o OMDb e propagar esses dados para o componente 
+"filho"(MovieOrSerieInfo) */
 
 const SearchMovieOrSerie = () => {
 	
