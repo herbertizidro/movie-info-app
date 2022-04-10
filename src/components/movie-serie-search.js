@@ -7,7 +7,7 @@ import movie2Line from '@iconify/icons-ri/movie-2-line';
 /* esse componente é reponsável por receber os dados da obra através da API Next Js que consulta o OMDb e propagar esses dados para o componente 
 "filho"(MovieOrSerieInfo). poderia ter passado tudo por props, mas o intuito era praticar context api */
 
-const SearchMovieOrSerie = () => {
+const MovieOrSerieSearch = () => {
 	
 	const [dadosImdb, setDadosImdb] = useState({
 		title: "",
@@ -246,4 +246,4 @@ const SearchMovieOrSerie = () => {
 	
 }
 
-export default SearchMovieOrSerie
+export default MovieOrSerieSearch
