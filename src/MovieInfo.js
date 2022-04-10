@@ -1,6 +1,6 @@
 import React from 'react';
 import './MovieInfo.css';
-import SearchMovieOrSerie from "./components/movie-serie-search";
+import MovieOrSerieSearch from "./components/movie-serie-search";
 import Contact from "./components/contact";
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 
@@ -24,7 +24,7 @@ function MovieInfoBrowser(){
 
 			<section className="content">
 				<Switch>
-					<Route exact path="/" component={SearchMovieOrSerie}/>
+					<Route exact path="/" component={MovieOrSerieSearch}/>
 					<Route path="/contact" component={Contact}/>
 				</Switch>
 			</section>
