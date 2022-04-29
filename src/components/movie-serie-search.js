@@ -169,11 +169,11 @@ const MovieOrSerieSearch = () => {
 			}else{
 				setDadosImdb({...dadosImdb, error: true})
 			}
-			setLoading(false);
 			
 		}catch(e){
 			console.log(e.message)
 			setDadosImdb({...dadosImdb, error: true})
+		}finally{
 			setLoading(false);
 		}
 		
