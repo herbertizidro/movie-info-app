@@ -11,6 +11,7 @@ const Contact = () => {
 		e.preventDefault(); //para não atualizar a página e não passar os dados pela url
 		let url = ""
 		try{
+			/*
 			fetch(url, method: "POST", headers: { "Content-Type": "application/json", }, body: JSON.stringify(
 				[{
 					"nome": nome,
@@ -20,6 +21,8 @@ const Contact = () => {
 			)).then((response) => {
 				if(response.status == 200){ setConfirmacaoEnvio(true) }else{ alert(response.message) }
 			})
+			*/
+			setConfirmacaoEnvio(true)
 		}catch(error){
 			alert(error.message);
 		}
