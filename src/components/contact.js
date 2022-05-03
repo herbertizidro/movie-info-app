@@ -7,15 +7,19 @@ const Contact = () => {
 	const [mensagem, setMensagem] = useState('')
 	const [confirmacaoEnvio, setConfirmacaoEnvio] = useState(false)
 	
-	async function postContactForm(e){
+	function postContactForm(e){
 		e.preventDefault(); //para não atualizar a página e não passar os dados pela url
+		let url = ""
 		try{
-			// ...
-			
-			//if(responseStatus == 200){
-			//	setConfirmacaoEnvio(true)
-			//}
-			setConfirmacaoEnvio(true)
+			fetch(url, method: "POST", headers: { "Content-Type": "application/json", }, body: JSON.stringify(
+				[{
+					"nome": nome,
+					"email": email,
+					"mensagem": mensagem
+				}]
+			)).then((response) => {
+				if(response.status == 200){ setConfirmacaoEnvio(true) }else{ alert(response.message) }
+			})
 		}catch(error){
 			alert(error.message);
 		}
