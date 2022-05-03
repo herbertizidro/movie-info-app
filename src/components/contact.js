@@ -1,6 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Contact = () => {
+	
+	const [nome, setNome] = useState('')
+	const [email, setEmail] = useState('')
+	const [mensagem, setMensagem] = useState('')
+	const [confirmacaoEnvio, setConfirmacaoEnvio] = useState(false)
+	
+	async function postContactForm(e){
+		e.preventDefault(); //para não atualizar a página e não passar os dados pela url
+		try{
+			// ...
+			
+			//if(responseStatus == 200){
+			//	setConfirmacaoEnvio(true)
+			//}
+			setConfirmacaoEnvio(true)
+		}catch(error){
+			alert(error.message);
+		}
+	}
 
 	return(
 			<>	
@@ -17,16 +36,18 @@ const Contact = () => {
 								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
 							</p><br/>
 							
-							<form action="https://formspree.io/<your-email>" method="POST">
-							  Name
-							  <input type="text" required name="name" className="form-control"/><br/>
-							  E-mail
-							  <input type="email" required name="email" className="form-control"/><br/>
-							  Message
-							  <textarea type="text" required name="message" rows="5" className="form-control"></textarea>
+							<form onSubmit={postContactForm}>
+							  <label htmlFor="nome">Nome</label>
+							  <input id="nome" type="text" required name="nome" className="form-control" value={nome} onChange={(e) => setNome(e.target.value)}/><br/>
+							  <label htmlFor="email">E-mail</label>
+							  <input id="email" type="email" required name="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)}/><br/>
+							  <label htmlFor="mensagem">Message</label>
+							  <textarea id="mensagem" type="text" required name="mensagem" rows="5" className="form-control" value={mensagem} onChange={(e) => setMensagem(e.target.value)}/>
 							  <br/>
-							  <input type="submit" value="Send message" className="btn btn-info"/>
-							</form><br/><br/><br/>
+							  <button className="btn btn-info">Enviar</button>
+							</form><br/>
+							{confirmacaoEnvio && <div className="alert alert-success" role="alert">Mensagem enviada com sucesso!</div>}
+							<br/><br/>
 					</div>
 						<div className="col-sm"></div>
 					</div>
