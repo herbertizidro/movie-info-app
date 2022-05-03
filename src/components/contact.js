@@ -7,7 +7,7 @@ const Contact = () => {
 	const [mensagem, setMensagem] = useState('')
 	const [confirmacaoEnvio, setConfirmacaoEnvio] = useState(false)
 	
-	async function postContactForm(e){
+	async function postContactForm(){
 		e.preventDefault(); //para não atualizar a página e não passar os dados pela url
 		try{
 			// ...
