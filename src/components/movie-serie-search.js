@@ -5,7 +5,8 @@ import { Icon, InlineIcon } from '@iconify/react';
 import movie2Line from '@iconify/icons-ri/movie-2-line';
 
 /* esse componente é reponsável por receber os dados da obra através da API Next Js que consulta o OMDb e propagar esses dados para o componente 
-"filho"(MovieOrSerieInfo). poderia ter passado tudo por props, mas o intuito era praticar context api */
+"filho"(MovieOrSerieInfo). poderia ter feito tudo de outro jeito, mas o intuito era praticar context api, um pouco de hooks e etc, então foi a forma
+que encontrei na época para encaixar essas coisas em um exemplo prático, pelo aprendizado. fique a vontade para dar um fork, refatorar ... */
 
 const MovieOrSerieSearch = () => {
 	
