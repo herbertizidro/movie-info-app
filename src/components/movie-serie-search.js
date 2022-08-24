@@ -47,7 +47,7 @@ const MovieOrSerieSearch = () => {
 		/* atualiza o estado de acordo com o conteúdo do local storage */
 		let searchHistory = localStorage.getItem("searchHistory");
 		if (searchHistory !== null) {
-			setDadosImdb({...dadosImdb, searchHistory })			
+			setDadosImdb((prevState) => ({...prevState, searchHistory}))			
 		}
 	}, [])
 	
@@ -88,8 +88,8 @@ const MovieOrSerieSearch = () => {
 			/* tratamento adicional pro trailer */
 			let trailer = json["Trailer"] != null ? json["Trailer"] : ""
 
-			setDadosImdb({
-				...dadosImdb,
+			setDadosImdb((prevState) => ({
+				...prevState,
 				title: json["Title"] || " N/A",
 				year: json["Year"] || " N/A",
 				rated: json["Rated"] || " N/A",
@@ -113,12 +113,12 @@ const MovieOrSerieSearch = () => {
 				poster: poster,
 				response: "True",
 				trailer: trailer.length ? trailer.split('=')[1] : "aDm5WZ3QiIE" // id de um vídeo "not found" genérico
-			})
+			}))
 						
 		}else if(json["Type"] === "series"){
 
-			setDadosImdb({
-				...dadosImdb,
+			setDadosImdb((prevState) => ({
+				...prevState,
 				title: json["Title"] || " N/A",
 				year: json["Year"] || " N/A",
 				rated: json["Rated"] || " N/A",
@@ -139,7 +139,7 @@ const MovieOrSerieSearch = () => {
 				poster: poster,
 				response: "True",
 				trailer: "aDm5WZ3QiIE" // id de um vídeo "not found" genérico, a biblioteca utilizada só pega trailer de filme
-			})
+			}))
 										
 		}
 	}
@@ -161,17 +161,17 @@ const MovieOrSerieSearch = () => {
 			
 			if(responseStatus == 200){
 				if(json["Response"] === "False"){
-					setDadosImdb({...dadosImdb, response: "False"})
+					setDadosImdb((prevState) => ({...prevState, response: "False"}))
 				}else{
 					stateUpdate(json);
 				}
 			}else{
-				setDadosImdb({...dadosImdb, error: true})
+				setDadosImdb((prevState) => ({...prevState, error: true}))
 			}
 			
 		}catch(e){
 			console.log(e.message)
-			setDadosImdb({...dadosImdb, error: true})
+			setDadosImdb((prevState) => ({...prevState, error: true}))
 		}finally{
 			setLoading(false);
 		}
