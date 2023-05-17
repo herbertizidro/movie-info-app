@@ -2,10 +2,15 @@ import React, { useContext } from 'react';
 import AppContext from './context/context';
 import YouTube from 'react-youtube';
 
+import { DEFAULT_TYPES } from './constants/index';
+
 /* exibe a informação relacionada ao filme ou série */
 
-const MovieData = (context) => {
-	return(
+const mountMovieOrSerie = context => {
+
+	if(!DEFAULT_TYPES.includes(context.type)) return
+	
+	return context.type === DEFAULT_TYPES[0] ? (
 		<div className="col-lg details"> 
 			<b> Director:</b> {context.director} | 
 			<b> Writer:</b> {context.writer} | 
@@ -21,11 +26,7 @@ const MovieData = (context) => {
 			<b> Website:</b> {context.website} | 
 			<b> Poster:</b> <a className='text-info' href={context.poster} target="_blank">Show in full size</a>
 		</div>
-	)
-}
-
-const SerieData = (context) => {
-	return(
+	) : (
 		<div className="col-lg details"> 
 			<b> Director:</b> {context.director} | 
 			<b> Writer:</b> {context.writer} | 
@@ -38,8 +39,9 @@ const SerieData = (context) => {
 			<b style={{fontSize: '17px'}}> Seasons:</b> <span style={{fontSize: '17px'}}>{context.totalSeasons}</span> | 
 			<b> Poster:</b> <a className='text-info' href={context.poster}>Show in full size</a>
 		</div>
-	)
+	);
 }
+
 
 const MovieOrSerieInfo = () => {
 	
@@ -91,8 +93,7 @@ const MovieOrSerieInfo = () => {
 						
 						<div className="container-fluid">
 							<div className="row">
-								{context.type === "movie" && (MovieData(context))}
-								{context.type === "series" && (SerieData(context))}
+								{mountMovieOrSerie(context)}
 							</div>
 							<br/><br/>
 							<hr class="hr-estilizado"/>
