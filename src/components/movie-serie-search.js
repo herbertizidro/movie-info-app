@@ -39,14 +39,12 @@ const MovieOrSerieSearch = () => {
 	
 	const [loading, setLoading] = useState(false);
 	
-	/* melhoria de performance, pra evitar renderizar desnecessariamente a cada atualização do input */
 	const inputRef = useRef("")
 	
-	/* executa uma vez ao iniciar */
 	useEffect(() => {
 		/* atualiza o estado de acordo com o conteúdo do local storage */
 		let searchHistory = localStorage.getItem("searchHistory");
-		if (searchHistory !== null) {
+		if (searchHistory) {
 			setDadosImdb((prevState) => ({...prevState, searchHistory}))			
 		}
 	}, [])
@@ -70,75 +68,51 @@ const MovieOrSerieSearch = () => {
 		// coloca o titulo do filme no localStorage pra que fique registrada a última obra pesquisada
 		// decidi pôr o titulo e não o "dadosImdb.input" porque o titulo é mais completo em alguns
 		// casos, como o filme popularmente conhecido como "Zohan" e seu nome real
-		localStorage.setItem('searchHistory', json["Title"].toUpperCase());
+		localStorage.setItem('searchHistory', json["Title"]?.toUpperCase());
 		
 		// caso a api não retorne uma imagem
-		let poster = json["Poster"] == 'N/A' ? require("./images/image-not-found.png") : json["Poster"];
+		const poster = json["Poster"] === 'N/A' ? require("./images/image-not-found.png") : json["Poster"];
+		const data = {
+			title: json["Title"] || " N/A",
+			year: json["Year"] || " N/A",
+			rated: json["Rated"] || " N/A",
+			released: json["Released"] || " N/A",
+			runtime: json["Runtime"] || " N/A",
+			genre: json["Genre"] || " N/A",
+			director: json["Director"] || " N/A",
+			writer: json["Writer"] || " N/A",
+			actors: json["Actors"] || " N/A",
+			plot: json["Plot"] || " N/A",					
+			language: json["Language"] || " N/A",
+			country: json["Country"] || " N/A",
+			awards: json["Awards"] || " N/A",			
+			imdb: json["imdbRating"] || " N/A",
+			imdbid: json["imdbID"] || " N/A",
+			type: json["Type"] || " N/A",
+			poster: poster,
+			response: "True",
+			trailer: trailer.length && json["Type"] === "movie" ? trailer.split('=')[1] : "aDm5WZ3QiIE" // id de um vídeo "not found" genérico
+		}
 		
 		if(json["Type"] === "movie"){
 			
 			/* alguns não tem nota do rotten */			
-			let rotten;
-			try{
-				rotten = json["Ratings"][1]["Value"];
-			}catch(e){
-				rotten = "N/A";
-			}
-			
-			/* tratamento adicional pro trailer */
-			let trailer = json["Trailer"] != null ? json["Trailer"] : ""
-
+			let rotten = json?.Ratings[1]?.Value || " N/A";
 			setDadosImdb((prevState) => ({
 				...prevState,
-				title: json["Title"] || " N/A",
-				year: json["Year"] || " N/A",
-				rated: json["Rated"] || " N/A",
-				released: json["Released"] || " N/A",
-				runtime: json["Runtime"] || " N/A",
-				genre: json["Genre"] || " N/A",
-				director: json["Director"] || " N/A",
-				writer: json["Writer"] || " N/A",
-				actors: json["Actors"] || " N/A",
-				plot: json["Plot"] || " N/A",	
-				language: json["Language"] || " N/A",
-				country: json["Country"] || " N/A",
-				awards: json["Awards"] || " N/A",			
-				imdb: json["imdbRating"] || " N/A",
-				imdbid: json["imdbID"] || " N/A",
+				...data,
 				rotten: rotten,
-				type: json["Type"] || " N/A",
 				boxoffice: json["BoxOffice"] || " N/A",
 				production: json["Production"] || " N/A",
 				website: json["Website"] || " N/A",
-				poster: poster,
-				response: "True",
-				trailer: trailer.length ? trailer.split('=')[1] : "aDm5WZ3QiIE" // id de um vídeo "not found" genérico
 			}))
 						
 		}else if(json["Type"] === "series"){
 
 			setDadosImdb((prevState) => ({
 				...prevState,
-				title: json["Title"] || " N/A",
-				year: json["Year"] || " N/A",
-				rated: json["Rated"] || " N/A",
-				released: json["Released"] || " N/A",
-				runtime: json["Runtime"] || " N/A",
-				genre: json["Genre"] || " N/A",
-				director: json["Director"] || " N/A",
-				writer: json["Writer"] || " N/A",
-				actors: json["Actors"] || " N/A",
-				plot: json["Plot"] || " N/A",					
-				language: json["Language"] || " N/A",
-				country: json["Country"] || " N/A",
-				awards: json["Awards"] || " N/A",			
-				imdb: json["imdbRating"] || " N/A",
-				imdbid: json["imdbID"] || " N/A",
-				type: json["Type"] || " N/A",
+				...data,
 				totalSeasons: json["totalSeasons"] || " N/A",
-				poster: poster,
-				response: "True",
-				trailer: "aDm5WZ3QiIE" // id de um vídeo "not found" genérico, a biblioteca utilizada só pega trailer de filme
 			}))
 										
 		}
@@ -205,7 +179,7 @@ const MovieOrSerieSearch = () => {
 											</div>
 										</div>
 										{dadosImdb.response === "False" && <div className="alert alert-danger mt-2" role="alert">Sorry, no result found&nbsp;&#128546;</div>}
-										{dadosImdb.searchHistory.length > 0 && <div id="last-search" className="mt-2"><span className="text-white">Your last search:  </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
+										{dadosImdb.searchHistory.length && <div id="last-search" className="mt-2"><span className="text-white">Your last search:  </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
 										{dadosImdb.error && <div className="alert alert-danger mt-2" role="alert">Sorry, an internal error occurred &nbsp;&#128546;</div>}
 										{loading && <div className="mt-3 d-flex justify-content-center"><div className="spinner-grow text-info" role="status"><span className="sr-only">Loading...</span></div></div>}
 									   </div>
@@ -214,7 +188,7 @@ const MovieOrSerieSearch = () => {
 										<input type="text" className="form-control shadow-none" placeholder="Search for a movie or serie title" value={dadosImdb.input} onChange={(e) => inputUpdate(e)}/>
 										<button className="btn btn-info mt-2 w-100 shadow-none" type="button" onClick={() => getMovieInfoApi()}>Search</button>										
 										{dadosImdb.response === "False" && <div className="alert alert-danger mt-2" role="alert">Sorry, no result found&nbsp;&#128546;</div>}
-										{dadosImdb.searchHistory.length > 0 && <div id="last-search" className="mt-2"><span className="text-white">Your last search: </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
+										{dadosImdb.searchHistory.length && <div id="last-search" className="mt-2"><span className="text-white">Your last search: </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
 										{dadosImdb.error && <div className="alert alert-danger mt-2" role="alert">Sorry, an internal error occurred &nbsp;&#128546;</div>}
 										{loading && <div className="mt-3 d-flex justify-content-center"><div className="spinner-grow text-info" role="status"><span className="sr-only">Loading...</span></div></div>}
 									   </div>
