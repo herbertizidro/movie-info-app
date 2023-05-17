@@ -8,14 +8,10 @@ export const AppProvider = AppContext.Provider;
 /* 
 export const AppConsumer = AppContext.Consumer;
   
-  //caso fosse acessar o contexto dessa forma: 
+  // caso fosse acessar o contexto dessa forma: 
   return(
     <AppConsumer.Consumer>
-      {value => (
-        <>
-          <h3>{value.title}</h3>
-        </>
-       )}
+      {value => <h3>{value.title}</h3>}
     </AppConsumer.Consumer>
    )
 */
