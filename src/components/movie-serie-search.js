@@ -4,7 +4,7 @@ import AppProvider from './context/context';
 import { Icon, InlineIcon } from '@iconify/react';
 import movie2Line from '@iconify/icons-ri/movie-2-line';
 
-import { scrollTo } from '../helpers/index';
+import { scrollTo } from './helpers/index';
 import { DEFAULT_TYPE_MOVIE, DEFAULT_TYPE_SERIES } from './constants/index';
 
 /* apenas um exercício pra praticar context api. esse componente recebe os dados da api next js e propaga pro componente MovieOrSerieInfo */
@@ -51,7 +51,7 @@ const MovieOrSerieSearch = () => {
 	}, [])
 	
 	/* observa atualizações no dadosImdb.title */
-	useEffect(() => scrollTo(), [dadosImdb.title]);
+	useEffect(() => { scrollTo("movie-or-serie-component") }, [dadosImdb.title]);
 	
 	/* atualiza o estado e o localStorage após obter os dados da API */
 	function stateUpdate (json) {
