@@ -6,7 +6,7 @@ import { DEFAULT_TYPES } from './constants/index';
 
 /* exibe a informação relacionada ao filme ou série */
 
-const mountMovieOrSerie = context => {
+const mountMovieOrSerieInfo = context => {
 
 	if(!DEFAULT_TYPES.includes(context.type)) return
 	
@@ -93,7 +93,7 @@ const MovieOrSerieInfo = () => {
 						
 						<div className="container-fluid">
 							<div className="row">
-								{mountMovieOrSerie(context)}
+								{mountMovieOrSerieInfo(context)}
 							</div>
 							<br/><br/>
 							<hr class="hr-estilizado"/>
