@@ -168,7 +168,7 @@ const MovieOrSerieSearch = () => {
 											<div class="morphing-text">Welcome!</div>
 										</div>
 									  </div>
-									  
+									{/* obs: falta componentizar essa parte, principalmente */}
 									  <div id="search-desktop" className="carousel-caption">
 										<div className="input-group">
 											<input type="text" className="form-control form-control-lg shadow-none" placeholder="Search for a movie or serie title" value={dadosImdb.input} onChange={(e) => inputUpdate(e)}/>
