@@ -44,7 +44,7 @@ const MovieOrSerieSearch = () => {
 	useEffect(() => {
 		/* atualiza o estado de acordo com o conteúdo do local storage */
 		let searchHistory = localStorage.getItem("searchHistory");
-		if (searchHistory) setDadosImdb((prevState) => ({...prevState, searchHistory}))
+		if (searchHistory !== null) setDadosImdb((prevState) => ({...prevState, searchHistory}))
 	}, [])
 	
 	/* observa atualizações no dadosImdb.title */
@@ -89,7 +89,7 @@ const MovieOrSerieSearch = () => {
 			type: json["Type"] || " N/A",
 			poster: poster,
 			response: "True",
-			trailer: trailer.length && json["Type"] === "movie" ? trailer.split('=')[1] : "aDm5WZ3QiIE" // id de um vídeo "not found" genérico
+			trailer: json?.Trailer?.length && json["Type"] === "movie" ? json["Trailer"].split('=')[1] : "aDm5WZ3QiIE" // id de um vídeo "not found" genérico
 		}
 		
 		if(json["Type"] === "movie"){
@@ -177,7 +177,7 @@ const MovieOrSerieSearch = () => {
 											</div>
 										</div>
 										{dadosImdb.response === "False" && <div className="alert alert-danger mt-2" role="alert">Sorry, no result found&nbsp;&#128546;</div>}
-										{dadosImdb.searchHistory.length && <div id="last-search" className="mt-2"><span className="text-white">Your last search:  </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
+										{dadosImdb.searchHistory.length > 0 && <div id="last-search" className="mt-2"><span className="text-white">Your last search:  </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
 										{dadosImdb.error && <div className="alert alert-danger mt-2" role="alert">Sorry, an internal error occurred &nbsp;&#128546;</div>}
 										{loading && <div className="mt-3 d-flex justify-content-center"><div className="spinner-grow text-info" role="status"><span className="sr-only">Loading...</span></div></div>}
 									   </div>
@@ -186,7 +186,7 @@ const MovieOrSerieSearch = () => {
 										<input type="text" className="form-control shadow-none" placeholder="Search for a movie or serie title" value={dadosImdb.input} onChange={(e) => inputUpdate(e)}/>
 										<button className="btn btn-info mt-2 w-100 shadow-none" type="button" onClick={() => getMovieInfoApi()}>Search</button>										
 										{dadosImdb.response === "False" && <div className="alert alert-danger mt-2" role="alert">Sorry, no result found&nbsp;&#128546;</div>}
-										{dadosImdb.searchHistory.length && <div id="last-search" className="mt-2"><span className="text-white">Your last search: </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
+										{dadosImdb.searchHistory.length > 0 && <div id="last-search" className="mt-2"><span className="text-white">Your last search: </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
 										{dadosImdb.error && <div className="alert alert-danger mt-2" role="alert">Sorry, an internal error occurred &nbsp;&#128546;</div>}
 										{loading && <div className="mt-3 d-flex justify-content-center"><div className="spinner-grow text-info" role="status"><span className="sr-only">Loading...</span></div></div>}
 									   </div>
