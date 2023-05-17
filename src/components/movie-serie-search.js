@@ -4,6 +4,9 @@ import AppProvider from './context/context';
 import { Icon, InlineIcon } from '@iconify/react';
 import movie2Line from '@iconify/icons-ri/movie-2-line';
 
+import { scrollTo } from '../helpers/index';
+import { DEFAULT_TYPE_MOVIE, DEFAULT_TYPE_SERIES } from './constants/index';
+
 /* apenas um exercício pra praticar context api. esse componente recebe os dados da api next js e propaga pro componente MovieOrSerieInfo */
 
 const MovieOrSerieSearch = () => {
@@ -48,17 +51,7 @@ const MovieOrSerieSearch = () => {
 	}, [])
 	
 	/* observa atualizações no dadosImdb.title */
-	useEffect(() => {
-		
-		/* scrolla a tela pra div que exibe o resultado da busca */
-		function scrollToDiv () { 
-			let scroll_div = document.getElementById("movie-or-serie-component");
-			scroll_div.scrollIntoView({behavior: "smooth", block: 'nearest', inline: 'start'})
-		}
-
-		scrollToDiv();
-	  
-	}, [dadosImdb.title]);
+	useEffect(() => scrollTo(), [dadosImdb.title]);
 	
 	/* atualiza o estado e o localStorage após obter os dados da API */
 	function stateUpdate (json) {
@@ -92,7 +85,7 @@ const MovieOrSerieSearch = () => {
 			trailer: json?.Trailer?.length && json["Type"] === "movie" ? json["Trailer"].split('=')[1] : "aDm5WZ3QiIE" // id de um vídeo "not found" genérico
 		}
 		
-		if(json["Type"] === "movie"){
+		if(json["Type"] === DEFAULT_TYPE_MOVIE){
 			
 			/* alguns não tem nota do rotten */			
 			let rotten = json?.Ratings[1]?.Value || " N/A";
@@ -105,7 +98,7 @@ const MovieOrSerieSearch = () => {
 				website: json["Website"] || " N/A",
 			}))
 						
-		}else if(json["Type"] === "series"){
+		}else if(json["Type"] === DEFAULT_TYPE_SERIES){
 
 			setDadosImdb((prevState) => ({
 				...prevState,
@@ -168,7 +161,7 @@ const MovieOrSerieSearch = () => {
 											<div class="morphing-text">Welcome!</div>
 										</div>
 									  </div>
-									{/* obs: falta componentizar essa parte, principalmente */}
+									{/* obs: criar componentes para esses blocos */}
 									  <div id="search-desktop" className="carousel-caption">
 										<div className="input-group">
 											<input type="text" className="form-control form-control-lg shadow-none" placeholder="Search for a movie or serie title" value={dadosImdb.input} onChange={(e) => inputUpdate(e)}/>
