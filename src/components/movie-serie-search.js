@@ -44,9 +44,7 @@ const MovieOrSerieSearch = () => {
 	useEffect(() => {
 		/* atualiza o estado de acordo com o conteúdo do local storage */
 		let searchHistory = localStorage.getItem("searchHistory");
-		if (searchHistory) {
-			setDadosImdb((prevState) => ({...prevState, searchHistory}))			
-		}
+		if (searchHistory) setDadosImdb((prevState) => ({...prevState, searchHistory}))
 	}, [])
 	
 	/* observa atualizações no dadosImdb.title */
