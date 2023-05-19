@@ -62,7 +62,6 @@ const MovieOrSerieSearch = () => {
 		localStorage.setItem('searchHistory', json["Title"]?.toUpperCase());
 		
 		// caso a api não retorne uma imagem
-		const poster = json["Poster"] === 'N/A' ? require("./images/image-not-found.png") : json["Poster"];
 		const data = {
 			title: json["Title"] || " N/A",
 			year: json["Year"] || " N/A",
@@ -80,7 +79,7 @@ const MovieOrSerieSearch = () => {
 			imdb: json["imdbRating"] || " N/A",
 			imdbid: json["imdbID"] || " N/A",
 			type: json["Type"] || " N/A",
-			poster: poster,
+			poster: json["Poster"] === "N/A" ? require("./images/image-not-found.png") : json["Poster"],
 			response: "True",
 			trailer: json?.Trailer?.length && json["Type"] === "movie" ? json["Trailer"].split('=')[1] : "aDm5WZ3QiIE" // id de um vídeo "not found" genérico
 		}
