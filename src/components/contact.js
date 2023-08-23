@@ -5,10 +5,9 @@ const Contact = () => {
 	const [nome, setNome] = useState('')
 	const [email, setEmail] = useState('')
 	const [mensagem, setMensagem] = useState('')
-	const [confirmacaoEnvio, setConfirmacaoEnvio] = useState(false)
-	
+
 	function postContactForm(e){
-		e.preventDefault(); //para não atualizar a página e não passar os dados pela url
+		e.preventDefault();
 		let url = ""
 		try{
 			/*
@@ -18,11 +17,10 @@ const Contact = () => {
 					"email": email,
 					"mensagem": mensagem
 				}]
-			)).then((response) => {
-				if(response.status == 200){ setConfirmacaoEnvio(true) }else{ alert(response.message) }
+			)).then(response => {
+				//...
 			})
 			*/
-			setConfirmacaoEnvio(true)
 		}catch(error){
 			alert(error.message);
 		}
@@ -53,7 +51,6 @@ const Contact = () => {
 							  <br/>
 							  <button className="btn btn-info">Enviar</button>
 							</form><br/>
-							{confirmacaoEnvio && <div className="alert alert-success" role="alert">Mensagem enviada com sucesso!</div>}
 							<br/><br/>
 					</div>
 						<div className="col-sm"></div>
