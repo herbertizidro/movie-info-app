@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import AppContext from './context/context';
 import YouTube from 'react-youtube';
 
-import { DEFAULT_TYPES } from './constants/index';
+import { DEFAULT_TYPE_MOVIE, DEFAULT_TYPE_SERIES } from './constants/index';
 
 /* exibe a informação relacionada ao filme ou série */
 
@@ -10,7 +10,7 @@ const mountMovieOrSerieInfo = context => {
 
 	if(!DEFAULT_TYPES.includes(context.type)) return
 	
-	return context.type === DEFAULT_TYPES[0] ? (
+	return (
 		<div className="col-lg details"> 
 			<b> Director:</b> {context.director} | 
 			<b> Writer:</b> {context.writer} | 
@@ -20,25 +20,19 @@ const mountMovieOrSerieInfo = context => {
 			<b style={{fontSize: '17px'}}> Awards:</b> <span style={{fontSize: '17px'}}>{context.awards}</span> | 						
 			<b style={{fontSize: '17px'}}> IMDb:</b> <span style={{fontSize: '17px'}}>{context.imdb}/10</span> | 
 			<b> IMDb ID:</b> {context.imdbid} | 
-			<b style={{fontSize: '17px'}}> Rotten Tomatoes:</b> <span style={{fontSize: '17px'}}>{context.rotten}</span> | 
-			<b> Box office:</b> {context.boxoffice} | 
-			<b> Production:</b> {context.production} | 
-			<b> Website:</b> {context.website} | 
+			{context.type === DEFAULT_TYPE_MOVIE && (
+				<>
+					<b style={{fontSize: '17px'}}> Rotten Tomatoes:</b> <span style={{fontSize: '17px'}}>{context.rotten}</span> | 
+					<b> Box office:</b> {context.boxoffice} | 
+					<b> Production:</b> {context.production} | 
+					<b> Website:</b> {context.website} |
+				</>
+			)}
+			{context.type === DEFAULT_TYPE_SERIES && (
+				<b style={{fontSize: '17px'}}> Seasons:</b> <span style={{fontSize: '17px'}}>{context.totalSeasons}</span> | 
+			)}
 			<b> Poster:</b> <a className='text-info' href={context.poster} target="_blank">Show in full size</a>
-		</div>
-	) : (
-		<div className="col-lg details"> 
-			<b> Director:</b> {context.director} | 
-			<b> Writer:</b> {context.writer} | 
-			<b> Actors:</b> {context.actors} | 
-			<b> Language:</b> {context.language} | 
-			<b> Country:</b> {context.country} | 
-			<b style={{fontSize: '17px'}}> Awards:</b> <span style={{fontSize: '17px'}}>{context.awards}</span> | 						
-			<b style={{fontSize: '17px'}}> IMDb:</b> <span style={{fontSize: '17px'}}>{context.imdb}</span> | 
-			<b> IMDb ID:</b> {context.imdbid} | 
-			<b style={{fontSize: '17px'}}> Seasons:</b> <span style={{fontSize: '17px'}}>{context.totalSeasons}</span> | 
-			<b> Poster:</b> <a className='text-info' href={context.poster}>Show in full size</a>
-		</div>
+	        </div>
 	);
 }
 
