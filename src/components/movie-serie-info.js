@@ -20,17 +20,17 @@ const mountMovieOrSerieInfo = context => {
 			<b style={{fontSize: '17px'}}> Awards:</b> <span style={{fontSize: '17px'}}>{context.awards}</span> | 						
 			<b style={{fontSize: '17px'}}> IMDb:</b> <span style={{fontSize: '17px'}}>{context.imdb}/10</span> | 
 			<b> IMDb ID:</b> {context.imdbid} | 
+			<>
 			{context.type === DEFAULT_TYPE_MOVIE && (
-				<>
-					<b style={{fontSize: '17px'}}> Rotten Tomatoes:</b> <span style={{fontSize: '17px'}}>{context.rotten}</span> | 
-					<b> Box office:</b> {context.boxoffice} | 
-					<b> Production:</b> {context.production} | 
-					<b> Website:</b> {context.website} |
-				</>
+				<b style={{fontSize: '17px'}}> Rotten Tomatoes:</b> <span style={{fontSize: '17px'}}>{context.rotten}</span> | 
+				<b> Box office:</b> {context.boxoffice} | 
+				<b> Production:</b> {context.production} | 
+				<b> Website:</b> {context.website} |
 			)}
 			{context.type === DEFAULT_TYPE_SERIES && (
 				<b style={{fontSize: '17px'}}> Seasons:</b> <span style={{fontSize: '17px'}}>{context.totalSeasons}</span> | 
 			)}
+			</>
 			<b> Poster:</b> <a className='text-info' href={context.poster} target="_blank">Show in full size</a>
 	        </div>
 	);
