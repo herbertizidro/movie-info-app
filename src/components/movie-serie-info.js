@@ -8,7 +8,7 @@ import { DEFAULT_TYPE_MOVIE, DEFAULT_TYPE_SERIES } from './constants/index';
 
 const mountMovieOrSerieInfo = context => {
 
-	if(!DEFAULT_TYPES.includes(context.type)) return
+	if(context.type !== DEFAULT_TYPE_MOVIE && context.type !== DEFAULT_TYPE_SERIES) return
 	
 	return (
 		<div className="col-lg details"> 
