@@ -34,6 +34,7 @@ const MovieOrSerieSearch = () => {
 		production: "",
 		website: "",
 		poster: "",
+		response: "",
 		trailer: "",
 		searchHistory: "",
 		error: false
@@ -79,6 +80,7 @@ const MovieOrSerieSearch = () => {
 			imdbid: json["imdbID"] || " N/A",
 			type: json["Type"] || " N/A",
 			poster: json["Poster"] === "N/A" ? require("./images/image-not-found.png") : json["Poster"],
+			response: "True",
 			trailer: json?.Trailer?.length && json["Type"] === "movie" ? json["Trailer"].split('=')[1] : "aDm5WZ3QiIE" // id de um vídeo "not found" genérico
 		}
 		
