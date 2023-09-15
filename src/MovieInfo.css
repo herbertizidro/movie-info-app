@@ -15,7 +15,6 @@ html, body {margin: 0; padding: 0; height: 100vh;}
 .hr-estilizado{color: #f00; background-color: #F5F5F5; height: 1px;}
 .alien-img-mobile{display: none;}
 .alien-img-desktop{display: inline; min-height: 250px; min-width: 600px;}
-#search-mobile{display: none;}
 #search-desktop{display: block;}
 
 /* texto sobre a imagem do carousel */ 
@@ -37,10 +36,19 @@ html, body {margin: 0; padding: 0; height: 100vh;}
 #last-search{display: block;}
 
 /* DESKTOP */
-@media screen and (min-width:
-1365px){
-	.alien-img-desktop img{height:100% !important; width:auto !important;} /* imagem preenchendo o tamanho da tela */
+.alien-img-desktop{
+	width: 100%;
+    height: auto;
+    position: relative;
 }
+.alien-img-desktop img{
+	height: 100%;
+    position:relative;
+    background: no-repeat;
+    background-size: cover;
+    background-position: center;
+} /* imagem preenchendo o tamanho da tela */
+
 
 /* TABLETS */
 @media screen and (min-width:
@@ -70,7 +78,6 @@ html, body {margin: 0; padding: 0; height: 100vh;}
   }
   .alien-img-mobile{display: inline; min-height: 250px; max-height: 500px; min-width: 520px; min-height: 250px}
   .alien-img-desktop{display: none;}
-  #search-mobile{display: block;}
   #search-desktop{display: none;}
   #title-carousel{display: none;}
   #last-search{display: none;}
