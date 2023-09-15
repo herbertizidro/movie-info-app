@@ -125,17 +125,16 @@ const MovieOrSerieSearch = () => {
 			
 			if(responseStatus == 200){
 				if(json["Response"] === "False"){
-					setDadosImdb((prevState) => ({...prevState, response: "False"}))
+					alert('No results found!');
 				}else{
 					stateUpdate(json);
 				}
 			}else{
-				setDadosImdb((prevState) => ({...prevState, error: true}))
+				alert('An internal error ocurred!');
 			}
 			
 		}catch(e){
-			console.log(e.message)
-			setDadosImdb((prevState) => ({...prevState, error: true}))
+			alert(e.message)
 		}finally{
 			setLoading(false);
 		}
@@ -150,7 +149,7 @@ const MovieOrSerieSearch = () => {
 							<div className="carousel slide" data-ride="carousel">								
 								<div className="carousel-inner">
 									<div className="carousel-item active">
-														
+									 {/* obs: criar componentes para esses blocos */}				
 									  <div id="img-carousel">
 										<img className="alien-img-desktop" src={require('./images/alien-desktop.png')}/>
 										<img className="alien-img-mobile w-100" src={require('./images/alien-mobile.png')}/>
@@ -160,27 +159,12 @@ const MovieOrSerieSearch = () => {
 											<div class="morphing-text">Welcome!</div>
 										</div>
 									  </div>
-									{/* obs: criar componentes para esses blocos */}
-									  <div id="search-desktop" className="carousel-caption">
-										<div className="input-group">
-											<input type="text" className="form-control form-control-lg shadow-none" placeholder="Search for a movie or serie title" value={dadosImdb.input} onChange={(e) => inputUpdate(e)}/>
-											<div className="input-group-append">
-												<button className="btn btn-info shadow-none" type="button" onClick={() => getMovieInfoApi()}>Search</button>
-											</div>
-										</div>
-										{dadosImdb.response === "False" && <div className="alert alert-danger mt-2" role="alert">Sorry, no result found&nbsp;&#128546;</div>}
-										{dadosImdb.searchHistory.length > 0 && <div id="last-search" className="mt-2"><span className="text-white">Your last search:  </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
-										{dadosImdb.error && <div className="alert alert-danger mt-2" role="alert">Sorry, an internal error occurred &nbsp;&#128546;</div>}
-										{loading && <div className="mt-3 d-flex justify-content-center"><div className="spinner-grow text-info" role="status"><span className="sr-only">Loading...</span></div></div>}
-									   </div>
+
 									   
-									   <div id="search-mobile" className="carousel-caption">
+									   <div className="carousel-caption">
 										<input type="text" className="form-control shadow-none" placeholder="Search for a movie or serie title" value={dadosImdb.input} onChange={(e) => inputUpdate(e)}/>
-										<button className="btn btn-info mt-2 w-100 shadow-none" type="button" onClick={() => getMovieInfoApi()}>Search</button>										
-										{dadosImdb.response === "False" && <div className="alert alert-danger mt-2" role="alert">Sorry, no result found&nbsp;&#128546;</div>}
-										{dadosImdb.searchHistory.length > 0 && <div id="last-search" className="mt-2"><span className="text-white">Your last search: </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
-										{dadosImdb.error && <div className="alert alert-danger mt-2" role="alert">Sorry, an internal error occurred &nbsp;&#128546;</div>}
-										{loading && <div className="mt-3 d-flex justify-content-center"><div className="spinner-grow text-info" role="status"><span className="sr-only">Loading...</span></div></div>}
+										<button className="btn btn-info mt-2 w-100 shadow-none" type="button" onClick={() => getMovieInfoApi()}>{loading ? 'Loading...' : 'Search'}</button>
+										{dadosImdb.searchHistory && <div id="last-search" className="mt-2"><span className="text-white">Your last search: </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
 									   </div>
 									   
 									</div>
@@ -198,9 +182,11 @@ const MovieOrSerieSearch = () => {
 					
 					<div className="container">
 						<br/><div className="text-center"><h3>About Us</h3></div><br/>
-						<p>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, of a when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+						<p className="text-center">
+							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, of a when an unknown printer took a galley of type and scrambled it to make a type specimen book.							
+						</p>
+						<p className="text-center">
+							Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, of a when an unknown printer took a galley of type and scrambled it to make a type specimen book.
 						</p><br/>
 					</div>
 		
