@@ -8,7 +8,7 @@ const Contact = () => {
 
 	function postContactForm(e){
 		e.preventDefault();
-		let url = ""
+		let url = "";
 		try{
 			/*
 			fetch(url, method: "POST", headers: { "Content-Type": "application/json", }, body: JSON.stringify(
