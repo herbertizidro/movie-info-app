@@ -35,7 +35,7 @@ const mountMovieOrSerieInfo = context => {
 				</>
 			)}
 
-			<b> Poster:</b> <a className='text-info' href={context.poster} target="_blank">Show in full size</a>
+			<b> Poster:</b> <a className='text-info' href={context.poster} target="_blank" rel="noopener noreferrer">Show in full size</a>
 	        </div>
 	);
 }
