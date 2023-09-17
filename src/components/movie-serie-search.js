@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import MovieOrSerieInfo from "./movie-serie-info";
 import AppProvider from './context/context';
-import { Icon, InlineIcon } from '@iconify/react';
-import movie2Line from '@iconify/icons-ri/movie-2-line';
 
 import { scrollTo } from './helpers/index';
 import { DEFAULT_TYPE_MOVIE, DEFAULT_TYPE_SERIES } from './constants/index';
@@ -115,6 +113,7 @@ const MovieOrSerieSearch = () => {
 	
 	/* pega as informações da obra através da MovieInfoApi next js */
 	async function getMovieInfoApi () {
+		if (!inputRef.current?.length) return 
 		setLoading(true)
 		let url = `https://movieinfoapi.netlify.app/api/movieinfo?search=${inputRef.current}`
 		
@@ -123,7 +122,7 @@ const MovieOrSerieSearch = () => {
 			const responseStatus = response.status;
 			const json = await response.json();
 			
-			if(responseStatus == 200){
+			if(responseStatus === 200){
 				if(json["Response"] === "False"){
 					alert('No results found!');
 				}else{
@@ -151,18 +150,18 @@ const MovieOrSerieSearch = () => {
 									<div className="carousel-item active">
 									 {/* obs: criar componentes para esses blocos */}				
 									  <div id="img-carousel">
-										<img className="alien-img-desktop" src={require('./images/alien-desktop.png')}/>
-										<img className="alien-img-mobile w-100" src={require('./images/alien-mobile.png')}/>
+										<img className="alien-img-desktop" src={require('./images/alien-desktop.png')} alt="homepage banner"/>
+										<img className="alien-img-mobile w-100" src={require('./images/alien-mobile.png')} alt="homepage banner mobile"/>
 										<div id="title-carousel">
-											<div class="morphing-text">Lorem Ipsum.</div>
-											<div class="morphing-text">Lorem Ipsum is <br/> simply.</div>
-											<div class="morphing-text">Welcome!</div>
+											<div className="morphing-text">Lorem Ipsum.</div>
+											<div className="morphing-text">Lorem Ipsum is <br/> simply.</div>
+											<div className="morphing-text">Welcome!</div>
 										</div>
 									  </div>
 
 									   
 									   <div className="carousel-caption">
-										<input type="text" className="form-control shadow-none" placeholder="Search for a movie or serie title" value={dadosImdb.input} onChange={(e) => inputUpdate(e)}/>
+										<input type="text" className="form-control shadow-none" placeholder={dadosImdb.searchHistory || 'Jurassic Park'} value={dadosImdb.input} onChange={(e) => inputUpdate(e)}/>
 										<button className="btn btn-info mt-2 w-100 shadow-none" type="button" onClick={() => getMovieInfoApi()}>{loading ? 'Loading...' : 'Search'}</button>
 										{dadosImdb.searchHistory && <div id="last-search" className="mt-2"><span className="text-white">Your last search: </span><span className="badge badge-pill badge-info" style={{fontSize: 13}}>{dadosImdb.searchHistory}</span></div>}
 									   </div>
