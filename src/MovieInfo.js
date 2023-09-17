@@ -5,7 +5,7 @@ import Contact from "./components/contact";
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 
 // npm install --save-dev @iconify/react @iconify/icons-ri  https://iconify.design/icon-sets/
-import { Icon, InlineIcon } from '@iconify/react';
+import { Icon } from '@iconify/react';
 import movie2Line from '@iconify/icons-ri/movie-2-line';
 
 /* esse componente(pai) renderiza o wrapper que contém a estrutura do app (front-end) e controla as rotas */
