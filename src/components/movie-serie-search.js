@@ -45,11 +45,9 @@ const MovieOrSerieSearch = () => {
 	useEffect(() => {
 		/* atualiza o estado de acordo com o conteúdo do local storage */
 		let searchHistory = localStorage.getItem("searchHistory");
-		if (searchHistory !== null) setDadosImdb((prevState) => ({...prevState, searchHistory}))
-	}, [])
-	
-	/* observa atualizações no dadosImdb.title */
-	useEffect(() => { scrollTo("movie-or-serie-component") }, [dadosImdb.title]);
+		if (searchHistory) setDadosImdb((prevState) => ({...prevState, searchHistory}))
+		scrollTo("movie-or-serie-component");
+	}, [dadosImdb.title])
 	
 	/* atualiza o estado e o localStorage após obter os dados da API */
 	function stateUpdate (json) {
@@ -59,7 +57,6 @@ const MovieOrSerieSearch = () => {
 		// casos, como o filme popularmente conhecido como "Zohan" e seu nome real
 		localStorage.setItem('searchHistory', json["Title"]?.toUpperCase());
 		
-		// caso a api não retorne uma imagem
 		const data = {
 			title: json["Title"] || " N/A",
 			year: json["Year"] || " N/A",
