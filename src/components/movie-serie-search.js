@@ -119,8 +119,11 @@ const MovieOrSerieSearch = () => {
 			const responseStatus = response.status;
 			const json = await response.json();
 			
-			if(responseStatus === 200 && json["Response"] !== "False") stateUpdate(json);
-			if(responseStatus !== 200) alert('No results found!');
+			if(responseStatus === 200 && json["Response"] === "True") { 
+				stateUpdate(json);
+			}else{
+				alert('No results found!');
+			}
 			
 		}catch(e){
 			alert(e.message)
